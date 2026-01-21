@@ -1,7 +1,7 @@
 #ifndef TREE_H
 #define TREE_H
 
-#include "node.h"
+#include "tree_node.h"
 #include <stdbool.h>
 
 /*
@@ -14,7 +14,7 @@
 */
 typedef struct
 {
-    Node *root; // Pointer to the root node of the Tree (or NULL if empty)
+    TreeNode *root; // Pointer to the root node of the Tree (or NULL if empty)
     int size;
 } Tree;
 

@@ -1,9 +1,9 @@
 #include <stdlib.h>
-#include "node.h"
+#include "tree_node.h"
 
-Node *node_create(int data, Node *parent)
+TreeNode *node_create(int data, TreeNode *parent)
 {
-    Node *node = malloc(sizeof(Node)); // allocate memory for a Node
+    TreeNode *node = malloc(sizeof(TreeNode)); // allocate memory for a TreeNode
 
     if (!node)
     {
@@ -18,7 +18,7 @@ Node *node_create(int data, Node *parent)
     return node; // return pointer to the newly created node
 }
 
-void node_destroy(Node *node)
+void node_destroy(TreeNode *node)
 {
     free(node);
 }

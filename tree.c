@@ -15,7 +15,7 @@ Tree *tree_create(void)
     return tree;       // return pointer to the newly created tree
 }
 
-static void destroy_subtree(Node *node)
+static void destroy_subtree(TreeNode *node)
 {
     if (node == NULL)
     {
@@ -38,7 +38,7 @@ void tree_destroy(Tree *tree)
     free(tree);
 }
 
-static Node *insert_node(Node *node, int data, bool *inserted)
+static TreeNode *insert_node(TreeNode *node, int data, bool *inserted)
 {
     // root and when nonexistent child of a leaf
     if (node == NULL)
@@ -81,7 +81,7 @@ bool tree_add(Tree *tree, int data)
     return inserted;
 }
 
-Node *find_min(Node *node)
+TreeNode *find_min(TreeNode *node)
 {
     if (node == NULL) // not needed because always called with valid node, but good practice
     {
@@ -96,7 +96,7 @@ Node *find_min(Node *node)
     return node;
 }
 
-static Node *remove_node(Node *node, int data, bool *removed)
+static TreeNode *remove_node(TreeNode *node, int data, bool *removed)
 {
     if (node == NULL)
     {
@@ -117,21 +117,21 @@ static Node *remove_node(Node *node, int data, bool *removed)
 
         // node to remove is a leaf or only has 1 child
         if (node->left == NULL)
-        {                              // since there is nothing to the left save right so it replaces the nodes place
-            Node *right = node->right; // save so that it can be returned
+        {                                  // since there is nothing to the left save right so it replaces the nodes place
+            TreeNode *right = node->right; // save so that it can be returned
             node_destroy(node);
             return right;
         }
         if (node->right == NULL)
         {
-            Node *left = node->left; // save so that it can be returned
+            TreeNode *left = node->left; // save so that it can be returned
             node_destroy(node);
             return left;
         }
 
         // node to remove has 2 children
         // find the inorder successor (smallest in the right subtree)
-        Node *successor = find_min(node->right);
+        TreeNode *successor = find_min(node->right);
         node->data = successor->data; // copy the successor's data to this node
 
         // remove the successor node from the right subtree (the original which is a dupe as of now)
