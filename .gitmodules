@@ -1,0 +1,3 @@
+[submodule "lib/singly_linked"]
+	path = lib/singly_linked
+	url = git@github.com:bryan-2006/singly_linked.git
