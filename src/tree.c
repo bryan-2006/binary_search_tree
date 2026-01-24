@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "tree.h"
+#include "../include/tree.h"
 
 Tree *tree_create(void)
 {
@@ -24,7 +24,7 @@ static void destroy_subtree(TreeNode *node)
 
     destroy_subtree(node->left);
     destroy_subtree(node->right);
-    node_destroy(node);
+    tree_node_destroy(node);
 }
 
 void tree_destroy(Tree *tree)
@@ -44,7 +44,7 @@ static TreeNode *insert_node(TreeNode *node, int data, bool *inserted)
     if (node == NULL)
     {
         *inserted = true;
-        return node_create(data);
+        return tree_node_create(data);
     }
 
     // traverse down tree to get to a spot that data can be placed
@@ -119,13 +119,13 @@ static TreeNode *remove_node(TreeNode *node, int data, bool *removed)
         if (node->left == NULL)
         {                                  // since there is nothing to the left save right so it replaces the nodes place
             TreeNode *right = node->right; // save so that it can be returned
-            node_destroy(node);
+            tree_node_destroy(node);
             return right;
         }
         if (node->right == NULL)
         {
             TreeNode *left = node->left; // save so that it can be returned
-            node_destroy(node);
+            tree_node_destroy(node);
             return left;
         }
 
@@ -156,3 +156,69 @@ bool tree_remove(Tree *tree, int data)
     }
     return removed;
 }
+
+static void preorder_helper(TreeNode *node, List *list)
+{
+    if (node == NULL)
+    {
+        return;
+    }
+
+    // move from root to left to right
+    list_push(list, node->data);
+    preorder_helper(node->left, list);
+    preorder_helper(node->right, list);
+}
+
+List *tree_preorder(Tree *tree)
+{
+    List *list = list_create();
+
+    preorder_helper(tree->root, list);
+
+    return list;
+};
+
+static void inorder_helper(TreeNode *node, List *list)
+{
+    if (node == NULL)
+    {
+        return;
+    }
+
+    // move from left to root to right
+    inorder_helper(node->left, list);
+    list_push(list, node->data);
+    inorder_helper(node->right, list);
+}
+
+List *tree_inorder(Tree *tree)
+{
+    List *list = list_create();
+
+    inorder_helper(tree->root, list);
+
+    return list;
+};
+
+static void postorder_helper(TreeNode *node, List *list)
+{
+    if (node == NULL)
+    {
+        return;
+    }
+
+    // move from right to left to root
+    postorder_helper(node->left, list);
+    postorder_helper(node->right, list);
+    list_push(list, node->data);
+}
+
+List *tree_postorder(Tree *tree)
+{
+    List *list = list_create();
+
+    postorder_helper(tree->root, list);
+
+    return list;
+};

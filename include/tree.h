@@ -3,6 +3,7 @@
 
 #include "tree_node.h"
 #include <stdbool.h>
+#include "../lib/singly_linked/include/list.h"
 
 /*
     A Tree is container that owns multiple Nodes which have parent/child relationships
@@ -41,5 +42,23 @@ bool tree_add(Tree *tree, int data);
     Frees removed Node's memory.
 */
 bool tree_remove(Tree *tree, int data);
+
+/*
+    Traversal functions that return a List of the Tree's data in the specified order.
+    Ownership of returned List pointer is transferred to caller.
+*/
+List *tree_preorder(Tree *tree);
+
+/*
+    Traversal functions that return a List of the Tree's data in the specified order.
+    Ownership of returned List pointer is transferred to caller.
+*/
+List *tree_inorder(Tree *tree);
+
+/*
+    Traversal functions that return a List of the Tree's data in the specified order.
+    Ownership of returned List pointer is transferred to caller.
+*/
+List *tree_postorder(Tree *tree);
 
 #endif

@@ -22,12 +22,12 @@ typedef struct TreeNode
     Allocates memory on the heap for a new TreeNode
     Ownership of returned pointer is transferred to caller
 */
-TreeNode *node_create(int data); // (int data, TreeNode *parent);
+TreeNode *tree_node_create(int data); // (int data, TreeNode *parent);
 
 /*
     Frees memory allocated for a TreeNode
     The pointer is INVALID after this call
 */
-void node_destroy(TreeNode *node);
+void tree_node_destroy(TreeNode *node);
 
 #endif

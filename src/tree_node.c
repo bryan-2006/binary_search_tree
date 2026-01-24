@@ -1,7 +1,7 @@
 #include <stdlib.h>
-#include "tree_node.h"
+#include "../include/tree_node.h"
 
-TreeNode *node_create(int data, TreeNode *parent)
+TreeNode *tree_node_create(int data)
 {
     TreeNode *node = malloc(sizeof(TreeNode)); // allocate memory for a TreeNode
 
@@ -18,7 +18,7 @@ TreeNode *node_create(int data, TreeNode *parent)
     return node; // return pointer to the newly created node
 }
 
-void node_destroy(TreeNode *node)
+void tree_node_destroy(TreeNode *node)
 {
     free(node);
 }
